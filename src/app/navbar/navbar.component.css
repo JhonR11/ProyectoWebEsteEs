@@ -1,0 +1,41 @@
+.navbar {
+    height: 64px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    background-color: white;
+    z-index: 10;
+  }
+  
+  .menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .menu-button:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+  }
+  
+  .logo svg {
+    margin-right: 8px;
+  }
+  
+  .logo h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }

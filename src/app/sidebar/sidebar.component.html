@@ -1,0 +1,16 @@
+<aside class="sidebar" [ngClass]="{'sidebar-open': (sidebarService.isOpen$ | async)}">
+    <nav class="sidebar-nav">
+      <ul class="sidebar-menu">
+        <li *ngFor="let item of menuItems">
+          <button 
+            class="sidebar-menu-item" 
+            [ngClass]="{'active': activeItem === item.id}"
+            (click)="setActiveItem(item.id)"
+          >
+          <fa-icon [icon]="item.icon" class="menu-icon"></fa-icon>
+            <span class="label">{{ item.label }}</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </aside>
