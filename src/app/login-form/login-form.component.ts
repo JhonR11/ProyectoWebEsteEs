@@ -1,9 +1,9 @@
 import { Component, Output, EventEmitter } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
-import type { Router } from "@angular/router"
+import { Router } from "@angular/router"
 import { trigger, state, style, animate, transition } from "@angular/animations"
-import type { AuthService } from "../services/auth.service"
+import { AuthService } from "../services/auth.service"
 
 @Component({
   selector: "app-login-form",

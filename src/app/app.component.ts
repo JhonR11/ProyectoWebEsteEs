@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { SidebarService } from './services/sidebar.services';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { SidebarService } from './services/sidebar.services';
   imports: [
     CommonModule, 
     NavbarComponent, 
-    SidebarComponent,  
+    SidebarComponent,
+    RouterModule,  
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

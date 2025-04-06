@@ -3,7 +3,7 @@
   <div class="content-container">
     <app-sidebar></app-sidebar>
     <main [ngClass]="{'main-shifted': (sidebarService.isOpen$ | async)}">
-      
+      <router-outlet></router-outlet>
     </main>
   </div>
 </div>
