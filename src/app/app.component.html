@@ -1,5 +1,5 @@
 <div class="app-container">
-  <app-navbar></app-navbar>
+<app-navbar *ngIf="!isLogin"></app-navbar>
   <div class="content-container">
     <app-sidebar></app-sidebar>
     <main [ngClass]="{'main-shifted': (sidebarService.isOpen$ | async)}">

@@ -1,0 +1,131 @@
+.background-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.code-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16rem;
+  overflow: hidden;
+  z-index: 0;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.code-left {
+  left: 0;
+}
+
+.code-right {
+  right: 0;
+}
+
+.code-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+.code-line {
+  font-size: 0.5rem;
+  font-family: monospace;
+  color: white;
+  white-space: nowrap;
+}
+
+.code-line-right {
+  text-align: right;
+}
+
+.header-line {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-divider {
+  height: 1px;
+  width: 4rem;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.header-text {
+  margin: 0 1rem;
+  font-size: 0.875rem;
+  font-family: monospace;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.reference-container {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  width: 100%;
+  max-width: 32rem;
+}
+
+.reference-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.reference-item {
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.reference-item:hover {
+  opacity: 0.6;
+}
+
+.reference-code {
+  font-size: 0.625rem;
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.reference-desc {
+  font-size: 0.5rem;
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.25rem;
+}
+
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Courier New", monospace;
+  background-color: #000000;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+button {
+  font-family: inherit;
+}
+
+

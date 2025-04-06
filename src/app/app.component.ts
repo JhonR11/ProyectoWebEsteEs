@@ -4,7 +4,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { SidebarService } from './services/sidebar.services';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +14,24 @@ import { RouterModule } from '@angular/router';
     CommonModule, 
     NavbarComponent, 
     SidebarComponent,
-    RouterModule,  
+    RouterModule, 
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
   title = 'map-application';
-  
-  constructor(public sidebarService: SidebarService) {}
+  isLogin = false;  
+  isOpen= false;
+  constructor(public sidebarService: SidebarService, private router:Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      const navigationEndEvent = event as NavigationEnd;
+      this.isLogin = navigationEndEvent.url === '/login' || navigationEndEvent.url === '/register';
+    }); 
+  }
+
 }
+

@@ -1,72 +1,65 @@
-import { Component, Output, EventEmitter } from "@angular/core"
+import { Component, type OnInit, type OnDestroy, signal } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
-import { Router } from "@angular/router"
-import { trigger, state, style, animate, transition } from "@angular/animations"
-import { AuthService } from "../services/auth.service"
+import { BackgroundElementsComponent } from "../background-elements/background-elements.component"
 
 @Component({
   selector: "app-login-form",
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BackgroundElementsComponent],
   templateUrl: "./login-form.component.html",
   styleUrls: ["./login-form.component.css"],
-  animations: [
-    trigger("tabAnimation", [
-      state("login", style({ transform: "translateX(0)" })),
-      state("register", style({ transform: "translateX(0)" })),
-      transition("login => register", [
-        style({ transform: "translateX(0)" }),
-        animate("0.3s ease-out", style({ transform: "translateX(-100%)" })),
-        style({ transform: "translateX(100%)" }),
-        animate("0.3s ease-out", style({ transform: "translateX(0)" })),
-      ]),
-      transition("register => login", [
-        style({ transform: "translateX(0)" }),
-        animate("0.3s ease-out", style({ transform: "translateX(100%)" })),
-        style({ transform: "translateX(-100%)" }),
-        animate("0.3s ease-out", style({ transform: "translateX(0)" })),
-      ]),
-    ]),
-  ],
 })
-export class LoginFormComponent {
-  @Output() closeForm = new EventEmitter<void>()
+export class LoginFormComponent implements OnInit, OnDestroy {
+  id = signal("")
+  password = signal("")
+  loading = signal(false)
+  initialized = signal(false)
+  showForm = signal(false)
+  scanLine = signal(0)
 
-  isLogin = true
-  loginData = {
-    email: "",
-    password: "",
+  private scanInterval: any
+  private timer1: any
+  private timer2: any
+
+  ngOnInit() {
+    // Initialization sequence
+    this.timer1 = setTimeout(() => {
+      this.initialized.set(true)
+    }, 1000)
+
+    this.timer2 = setTimeout(() => {
+      this.showForm.set(true)
+    }, 2000)
+
+    // Scan line animation
+    this.scanInterval = setInterval(() => {
+      this.scanLine.update((value) => (value + 1) % 100)
+    }, 50)
   }
 
-  registerData = {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  }
-  
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-  ) {}
-
-  toggleForm() {
-    this.isLogin = !this.isLogin
+  ngOnDestroy() {
+    clearTimeout(this.timer1)
+    clearTimeout(this.timer2)
+    clearInterval(this.scanInterval)
   }
 
-  onSubmit() {
-    if (this.isLogin) {
-      console.log("Login data:", this.loginData)
-      // Simular login exitoso
-      this.authService.login(this.loginData.email, this.loginData.password)
-      this.router.navigate(["/main"])
-    } else {
-      console.log("Register data:", this.registerData)
-      // Simular registro exitoso
-      this.authService.register(this.registerData.name, this.registerData.email, this.registerData.password)
-      this.router.navigate(["/main"])
-    }
+  handleSubmit() {
+    this.loading.set(true)
+
+    // Simulate login process
+    setTimeout(() => {
+      this.loading.set(false)
+      console.log({ id: this.id(), password: this.password() })
+    }, 2000)
+  }
+
+  updateId(event: Event) {
+    this.id.set((event.target as HTMLInputElement).value)
+  }
+
+  updatePassword(event: Event) {
+    this.password.set((event.target as HTMLInputElement).value)
   }
 }
 

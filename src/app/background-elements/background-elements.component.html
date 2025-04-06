@@ -1,0 +1,56 @@
+<!-- Canvas background -->
+<canvas #canvas class="background-canvas"></canvas>
+
+<!-- Left side code text -->
+<div class="code-container code-left">
+  <div class="code-scroll">
+    @for (line of codeLines.slice(0, 50); let i = $index; track i) {
+      <div 
+        class="code-line"
+        [style.opacity]="1 - (i / 50)"
+        [style.transform]="'translateY(' + (i * 16) + 'px)'"
+      >
+        {{line}}
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Right side code text -->
+<div class="code-container code-right">
+  <div class="code-scroll">
+    @for (line of codeLines.slice(50); let i = $index; track i) {
+      <div 
+        class="code-line code-line-right"
+        [style.opacity]="1 - (i / 50)"
+        [style.transform]="'translateY(' + (i * 16) + 'px)'"
+      >
+        {{line}}
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Top header line -->
+<div class="header-line">
+  <div class="header-content">
+    <div class="header-divider"></div>
+    <div class="header-text">MAIN SYSTEM</div>
+    <div class="header-divider"></div>
+  </div>
+</div>
+
+<!-- Bottom reference elements -->
+<div class="reference-container">
+  <div class="reference-grid">
+    @for (code of ['BRF.501', 'BRF.502', 'BRF.503', 'BRF.504']; let i = $index; track i) {
+      <div class="reference-item">
+        <div class="reference-code">{{code}}</div>
+        <div class="reference-desc">
+          SYSTEM DATA REFERENCE {{i + 1}}
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
