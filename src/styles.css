@@ -2,23 +2,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+ @import 'mapbox-gl/dist/mapbox-gl.css';
 /* Global styles */
- {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+
   
   html, body {
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  body {
-    background-color: #ffffff;
-    color: #333333;
-  }
+body{
+  background-color: black
+}
   
   /* Import Mapbox CSS */
-  @import 'mapbox-gl/dist/mapbox-gl.css';
+ 

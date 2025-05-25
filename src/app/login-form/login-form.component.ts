@@ -2,6 +2,7 @@ import { Component, type OnInit, type OnDestroy, signal } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 import { BackgroundElementsComponent } from "../background-elements/background-elements.component"
+import { Router } from "@angular/router"
 
 @Component({
   selector: "app-login-form",
@@ -21,6 +22,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   private scanInterval: any
   private timer1: any
   private timer2: any
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     // Initialization sequence
@@ -44,15 +47,23 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     clearInterval(this.scanInterval)
   }
 
-  handleSubmit() {
+  async handleSubmit() {
     this.loading.set(true)
+    const id = this.id()
+    const password = this.password()
 
-    // Simulate login process
-    setTimeout(() => {
+    // Simulate a login request
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    // Redirect to the main page
+    if (id === "admin" && password === "admin") {
+      this.router.navigate(["/main"])
+    } else {
+      alert("Invalid credentials")
       this.loading.set(false)
-      console.log({ id: this.id(), password: this.password() })
-    }, 2000)
+    }
   }
+
 
   updateId(event: Event) {
     this.id.set((event.target as HTMLInputElement).value)

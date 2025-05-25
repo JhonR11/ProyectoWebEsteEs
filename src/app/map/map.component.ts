@@ -1,6 +1,11 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Map, tileLayer, marker } from 'leaflet';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import mapboxgl from 'mapbox-gl';
+import as from 'mapbox-gl';
+import { environment } from '../../enviroments/enviroment.prod';
+
 @Component({
     selector: 'app-map',
     standalone: true,
@@ -8,30 +13,22 @@ import { Map, tileLayer, marker } from 'leaflet';
     templateUrl: './map.component.html',
     styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit, OnDestroy {
-    @ViewChild('map', { static: true }) mapContainer!: ElementRef;
-    private map!: Map;
+
+
+
+export class MapComponent implements OnInit{
+    map?: mapboxgl.Map;
+
+
 
     ngOnInit(): void {
-        this.initializeMap();
+        mapboxgl.accessToken = environment.maptokenkey;
+        this.map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v12', // style URL
+            center: [-73.253097, 10.461729], // starting position [lng, lat]
+            zoom:13.14, // starting zoom
+        });
     }
-
-    ngOnDestroy(): void {
-        if (this.map) {
-            this.map.remove();
-        }
-    }
-
-    private initializeMap(): void {
-        this.map = new Map(this.mapContainer.nativeElement).setView([51.505, -0.09], 13);
-
-        tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(this.map);
-
-        marker([51.505, -0.09]).addTo(this.map)
-            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-            .openPopup();
-    }
+    title = "MapBox";
 }
